@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索框二</title>
+</head>
+<body>
+    <input onfocus="Focus(this);" onblur="Blur(this);" id="search" value="请输入关键字" style="color: gray;" />
+
+    <script>
+        function Focus(ths){
+            ths.style.color = "black";
+            if(ths.value == '请输入关键字' || ths.value.trim() == ""){
+
+                ths.value = "";
+            }
+        }
+
+        function Blur(ths){
+            if(ths.value.trim() == ""){
+                ths.value = '请输入关键字';
+                ths.style.color = 'gray';
+            }else{
+                ths.style.color = "black";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form表单验证</title>
+    <style>
+        .item{
+            width:250px;
+            height:60px;
+            position: relative;
+        }
+        .item input{
+            width: 200px;
+        }
+        .item span{
+            position: absolute;
+            top:22px;
+            left:0;
+            font-size:10px;
+            background-color: indianred;
+            color: white;
+            display: inline-block;
+            width:200px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form>
+            <div class="item">
+                <input class="c1" type="text" name="username" label="用户名"/>
+            </div>
+            <div class="item">
+                <input class="c1" type="password" name="pwd" label="密码"/>
+            </div>
+            <!--<input type="submit" value="提交" onclick="return CheckValid();"/>-->
+            <input type="submit" value="提交"/>
+        </form>
+    </div>
+
+    <script src="./js/jquery-1.12.4.js"></script>
+    <script src="./js/jquery-1.12.4.js"></script>
+    <script>
+//        第一种方式：DOM方式绑定
+//        function CheckValid() {
+//             找到form标签下的所有需要验证的标签
+//             $('form .c1')
+//             $('form input[type="text"],input[type="password"])
+//             循环所有需要验证的标签，获取内容
+//            $('form .item span').remove();
+//            var flag = true;
+//
+//            $('form .c1').each(function () {
+//                // 每一个元素执行匿名函数
+//                // this
+//                console.log(this,$(this)[0]);
+//                var val = $(this).val();
+//                if(val.length == 0){
+//                    var laber = $(this).attr('label');
+//                    var tag = document.createElement('span');
+//                    tag.innerText = laber + "不能为空";
+//                    $(this).after(tag);
+//                    flag = false;
+//                }
+//            });
+//            return flag;
+//        }
+
+//        第二种：JQuery绑定(一般使用这种)
+        $(function () {
+            BindCheckValid();
+        });
+
+        function BindCheckValid() {
+            $('form :submit').click(function () {
+                var flag = true;
+                $('form .item span').remove();
+                $('form .c1').each(function () {
+                    // 每一个元素执行匿名函数
+                    // this
+                    console.log(this,$(this));
+                    var val = $(this).val();
+                    if(val.length == 0){
+                        var laber = $(this).attr('label');
+                        var tag = document.createElement('span');
+                        tag.innerText = laber + "不能为空";
+                        $(this).after(tag);
+                        flag = false;
+                        return false;
+                    }
+                });
+                return flag;
+            });
+        }
+
+    </script>
+</body>
+</html>
+

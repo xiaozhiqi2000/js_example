@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            position: relative;
+        }
+        .small-box{
+            border: 5px solid red;
+            height: 350px;
+            width: 350px;
+            position: relative;
+        }
+        .big-box{
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            left:360px;
+            top:0;
+            border: 5px solid black;
+            overflow: hidden;
+        }
+        .hide{
+            display: none;
+        }
+        .small-box .float{
+            width: 175px;
+            height: 175px;
+            background-color: grey;
+            position: absolute;
+            opacity: 0.8;
+        }
+        .big-box img{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="small-box">
+            <div class="float hide"></div>
+            <img src="pic/small.jpg">
+        </div>
+ 
+        <div class="big-box hide">
+            <img src="pic/big.jpg">
+        </div>
+    </div>
+ 
+<script src="./js/jquery-1.12.4.js"></script>
+<script src="./js/jquery-1.12.4.js"></script>
+<script>
+    $(function () {
+        $(".small-box").mouseover(function () {
+            $(this).children('.float').removeClass('hide').parent().next().removeClass('hide');
+        });
+ 
+        $(".small-box").mouseout(function () {
+            $(this).children('.float').addClass('hide').parent().next().addClass('hide');
+        });
+ 
+        $(".float").mousemove( function (e) {
+            var _event = e || window.event;
+ 
+            var small_box_width = $(".small-box").width();
+            var small_box_height = $(".small-box").height();
+ 
+            var float_height = $('.float').height();
+            var float_width = $(".float").width();
+ 
+            var float_height_half = float_height/2;
+            var float_width_half = float_width/2;
+ 
+            var float_right = _event.clientX- float_width_half;
+            var float_top = _event.clientY - float_height_half;
+ 
+            if(float_right<0){
+                float_right = 0;
+            }else if(float_right>small_box_width-float_width){
+                float_right=small_box_width-float_width
+            }
+            if(float_top<0){
+                float_top=0;
+            }else if(float_top>small_box_height-float_height){
+                float_top=small_box_height-float_height
+            }
+ 
+            $(".float").css({"left":float_right+"px","top":float_top+"px"});
+ 
+            var percentX=($(".big-box img").width()-$(".big-box").width())/ (small_box_width-float_width);
+            var percentY=($(".big-box img").height()-$(".big-box").height())/(small_box_height-float_height);
+             
+            $(".big-box img").css({"left":-percentX*float_right+"px","top":-percentY*float_top+"px"});
+        })
+ 
+    })
+</script>
+</body>
+</html>

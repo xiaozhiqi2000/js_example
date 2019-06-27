@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>event事件的内容</title>
+    <style>
+        *{
+            margin: 0;
+        }
+        .hide{
+            display:none;
+        }
+        .shade{
+            position: fixed;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            background-color: rgba(0,0,0,.6);
+        }
+        .modal{
+            position: fixed;
+            height: 400px;
+            width:500px;
+            background-color: white;
+            top:50%;
+            left:50%;
+            margin-top: -200px;
+            margin-left: -250px;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div style="height: 2000px;background-color: #dddddd;">
+        <input type="button" value="登录" onclick="show()"/>
+    </div>
+
+    <div id="shade" class="shade hide"></div>
+    <div id="modal" class="modal hide">
+        <input type="text" placeholder="用户名"/><br/>
+        <input type="password" placeholder="密码"/><br/>
+        <!--<a href="javascript:void(0)" onclick="cancle()">取消</a>-->
+    </div>
+
+    <script>
+        function show() {
+            var tag1 = document.getElementById('shade');
+            var tag2 = document.getElementById('modal');
+
+            tag1.classList.remove('hide');
+            tag2.classList.remove('hide');
+        }
+
+        function cancle() {
+                        var tag1 = document.getElementById('shade');
+            var tag2 = document.getElementById('modal');
+
+            tag1.classList.add('hide');
+            tag2.classList.add('hide');
+        }
+        window.onkeydown = function (event) {
+            console.log(event);
+            if(event.keyCode == 27){
+                cancle();
+            }
+        }
+    </script>
+</body>
+</html>

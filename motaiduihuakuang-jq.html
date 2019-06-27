@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        .outer{
+            position: relative;
+            width: 310px;
+            height: 310px;
+            margin: 20px auto;
+        }
+        .image{
+            position: relative;
+        }
+        .image img{
+            height: 310px;
+            width: 310px;
+            position: absolute;
+            border: dashed blue 1px;
+            top: 0;
+            left: 0;
+        }
+        .num{
+            position: absolute;
+            bottom:0;
+            left:100px;
+        }
+        .num li{
+            display: inline-block;
+            height: 20px;
+            width: 20px;
+            /*background-color: #3c763d;*/
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            cursor: pointer;
+ 
+        }
+ 
+        .position{
+            width: 310px;
+            position: absolute;
+            top:50%;
+            margin-top: -15px;
+            left: 0;
+        }
+ 
+        .position button{
+            display: block;
+            width: 30px;
+            height: 30px;
+            background-color:burlywood ;
+            opacity: 0.6;
+            border: 0;
+ 
+            display: none;
+        }
+ 
+        .outer:hover .position button{
+            display: block;
+        }
+        .left{
+            float: left;
+        }
+        .right{
+            float: right;
+        }
+        .active{
+            background-color: black;
+        }
+    </style>
+ 
+    <script src="./js/jquery-1.12.4.js"></script>
+    <script src="./js/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            $(".num li").first().addClass("active");
+            console.log( $(".num li"));
+            $(".num li").mouseover(function () {
+                console.log(this);
+                $(this).addClass("active").siblings().removeClass("active");
+                var index = $(this).index();
+                i = index;
+                $(".image img").eq(index).fadeIn(1000).siblings().fadeOut(1000);
+            });
+ 
+            var i = 0;
+            function autoMove() {
+                $(".num li").eq(i).addClass("active").siblings().removeClass("active");
+                $(".image img").eq(i).stop().fadeIn(1000).siblings().stop().fadeOut(1000);
+                i++;
+                if(i==5){
+                    i = 0;
+                }
+            }
+ 
+            var t1 = setInterval(autoMove,1000);
+ 
+            $(".outer").hover(function () {
+                clearInterval(t1);
+            },function () {
+                t1 = setInterval(autoMove,1000);
+            });
+             
+            $(".right").click(function () {
+                autoMove();
+            });
+ 
+            $(".left").click(function () {
+                i--;
+                if(i==-1){
+                    i = 4;
+                }
+                $(".num li").eq(i).addClass("active").siblings().removeClass("active");
+                $(".image img").eq(i).stop().fadeIn(1000).siblings().stop().fadeOut(1000);
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="outer">
+        <div class="image">
+            <img src="pic/a.png">
+            <img src="pic/1.jpeg">
+            <img src="pic/2.jpeg">
+            <img src="pic/3.jpeg">
+            <img src="pic/4.jpeg">
+        </div>
+        <div class="num">
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+        </div>
+        <div class="position">
+            <button class="left"> < </button>
+            <button class="right"> > </button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery 循环</title>
+</head>
+<body>
+
+    <script src="./js/jquery-1.12.4.js"></script>
+    <script src="./js/jquery-1.12.4.js"></script>
+    <script>
+        function BindCheckValid(){
+            $.each([11,22,33,44],function (k, v) {
+                if(y == 22){
+                    // return; //相当于continue
+                    // return false; //相当于break
+                    return false;
+                }
+                console.log(v);
+            })
+        }
+    </script>
+</body>
+</html>

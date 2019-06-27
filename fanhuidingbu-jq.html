@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            background-color: cornflowerblue;
+            width: 100%;
+        }
+        .content{
+            background-color: aqua;
+            min-height: 1000px;
+            width: 800px;
+            margin: 0 auto;
+        }
+        .retTop{
+            width: 35px;
+            height: 35px;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            background-color: chartreuse;
+        }
+        .hide{
+            display: none;
+        }
+    </style>
+    <script src="./js/jquery-1.12.4.js"></script>
+    <script src="./js/jquery-1.12.4.js"></script>
+     
+</head>
+<body>
+    <div class="container">
+        <div class="content"></div>
+        <div class="retTop">
+            返回顶部
+        </div>
+    </div>
+ 
+    <script>
+ 
+        $(function () {
+            window.onscroll = function () {
+                var scrollHeight = $(window).scrollTop();
+                if(scrollHeight<100){
+                    $(".retTop").addClass('hide');
+                }else {
+                    $(".retTop").removeClass('hide')
+                }
+            };
+ 
+            $(".retTop").click(function () {
+                $(window).scrollTop(0);
+            })
+        })
+    </script>
+</body>
+</html>

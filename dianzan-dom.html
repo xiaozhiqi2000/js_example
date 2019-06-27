@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .content{
+            margin: 0 auto;
+            width: 300px;
+            border: 1px solid chocolate;
+        }
+        ul{
+            list-style: none;
+            background-color: #cccccc;
+        }
+        ul li{
+            float: left;
+            display: block;
+            background-color: #2459a2;
+            padding:0 10px;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+        }
+        .clearfix:after{
+            display: block;
+            content: '';
+            height: 0;
+            visibility: hidden;
+            clear: both;
+        }
+        #info{
+            min-height: 200px;
+            width: 300px;
+        }
+        .hide{
+            display: none;
+        }
+        .active{
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <ul class="clearfix">
+            <li tg="1" class="active" onclick="Func(this)">价格走势</li>
+            <li tg="2" onclick="Func(this)">市场分布</li>
+            <li tg="3" onclick="Func(this)">其他</li>
+        </ul>
+
+        <div id="info">
+            <div targ="1" >conten1</div>
+            <div targ="2" class="hide">conten2</div>
+            <div targ="3" class="hide">conten3</div>
+        </div>
+    </div>
+
+    <script>
+        function Func(ths) {
+            var bot = ths.parentElement.children;
+            for(var i=0;i<bot.length;i++){
+                bot[i].classList.remove('active')
+            }
+            ths.classList.add('active');
+
+            var vtg = ths.getAttribute('tg');
+            var divs = document.getElementById('info').children;
+            for(var i=0;i<divs.length;i++){
+                if(divs[i].getAttribute('targ') == vtg){
+                    divs[i].classList.remove('hide');
+                }else{
+                    divs[i].classList.add('hide');
+                }
+            }
+
+        }
+    </script>
+</body>
+</html>
